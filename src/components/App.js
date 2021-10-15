@@ -43,7 +43,6 @@ function App() {
                 onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}/>
           <Footer/>
         </div>
-
         <PopupWithForm title='Редактировать профиль' name='profile-edit' submitText='Сохранить'
                        isOpen={isEditProfilePopupOpen}
                        onClose={setIsEditProfilePopupOpen}>

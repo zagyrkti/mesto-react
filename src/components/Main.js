@@ -19,7 +19,7 @@ function Main(props) {
           setUserAvatar(userData.avatar)
         })
         .catch(console.log)
-  })
+  },[])
 
   useEffect(() => {
     api.getCards()
@@ -27,7 +27,7 @@ function Main(props) {
           setCardsData(cardsData)
         })
         .catch(console.log)
-  })
+  },[])
 
 
   return (
