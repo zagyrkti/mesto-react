@@ -3,7 +3,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import React, {useState} from "react";
-import PopupWithImage from "./PopupWithImage";
+import ImagePopup from "./ImagePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
@@ -29,11 +29,12 @@ function App() {
 
   /*Вызывать все сеттеры чтобы закрыть один конкретный попап это какое-то дно
     сделал через передачу сеттера, ничего лучше не придумалось, если есть вариант получше буду благодарен*/
-/*  const closeAllPopups = () => {
+    const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
-  }*/
+    setSelectedCard({})
+  }
 
   return (
       <>
@@ -87,7 +88,7 @@ function App() {
           </label>
         </PopupWithForm>
         <PopupWithForm title='Вы уверены?' name='confirmation' submitText='Да'/>
-        <PopupWithImage card={selectedCard} onClose={setSelectedCard}/>
+        <ImagePopup card={selectedCard} onClose={setSelectedCard}/>
       </>
   );
 }

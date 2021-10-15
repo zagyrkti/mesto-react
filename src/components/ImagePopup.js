@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-function PopupWithImage(props) {
+function ImagePopup(props) {
   function handleClose(evt) {
     if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close") || (evt.key === "Escape")) {
       if (props.onClose) {
@@ -29,4 +29,4 @@ function PopupWithImage(props) {
   )
 }
 
-export default PopupWithImage
+export default ImagePopup
