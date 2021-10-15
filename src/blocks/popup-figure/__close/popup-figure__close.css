@@ -1,0 +1,25 @@
+.popup-figure__close {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("../../../images/close.svg");
+    background-position: center;
+    background-size: contain;
+    border: none;
+    transform: rotate(45deg);
+    outline: none;
+}
+
+@media screen and (max-width: 545px) {
+    .popup-figure__close {
+        top: -45px;
+        right: 5px;
+        width: 26px;
+        height: 26px;
+    }
+}

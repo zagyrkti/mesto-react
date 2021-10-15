@@ -1,0 +1,34 @@
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  padding: 0;
+  grid-area: avatar;
+  border-width: 0;
+  justify-self: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.profile__avatar::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 1);
+  background-image: url("../../../images/avatar_edit.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.profile__avatar:hover::after{
+ opacity: 0.8;
+}
+
