@@ -1,21 +1,24 @@
-import {useEffect} from "react";
+import {useEffect, useCallback} from "react";
 
 function PopupWithForm(props) {
-  const handlePopupClose = (evt) => {
+  const {onClose} = props
+  const handlePopupClose = useCallback((evt) => {
     if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close") || (evt.key === "Escape")) {
-      if (props.onClose) {
-        props.onClose(false)
+      if (onClose) {
+        onClose(false) /*boolean | false:close*/
       }
     }
-  }
+  }, [onClose])
 
   useEffect(() => {
-    document.addEventListener("keydown", handlePopupClose);
+    if (props.isOpen) {
+      document.addEventListener("keydown", handlePopupClose);
 
-    return () => {
-      document.removeEventListener("keydown", handlePopupClose);
+      return () => {
+        document.removeEventListener("keydown", handlePopupClose);
+      }
     }
-  })
+  }, [props.isOpen, handlePopupClose])
 
   return (
       <div className={`popup_type_${props.name} popup ${props.isOpen && 'popup_opened'}`}
