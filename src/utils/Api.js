@@ -47,7 +47,7 @@ class Api {
       .then(this._processResponse)
   }
 
-  setUser({name, about}) {
+  setUser(name, about) {
     return fetch(this._userUrl, {
       method: "PATCH",
       headers: this._headers,
@@ -57,6 +57,15 @@ class Api {
       })
     })
       .then(this._processResponse)
+  }
+
+
+  changeLikeCardStatus(id, isLiked) {
+    return fetch(`${this._likes}/${id}`, {
+      method: isLiked ? "DELETE" : "PUT",
+      headers: this._headers,
+    })
+        .then(this._processResponse)
   }
 
   setLike(id) {
