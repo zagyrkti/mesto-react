@@ -5,7 +5,7 @@ function PopupWithForm(props) {
   const handlePopupClose = useCallback((evt) => {
     if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close") || (evt.key === "Escape")) {
       if (onClose) {
-        onClose(false) /*boolean | false:close*/
+        onClose()
       }
     }
   }, [onClose])
@@ -22,8 +22,7 @@ function PopupWithForm(props) {
 
   return (
       <div className={`popup_type_${props.name} popup ${props.isOpen && 'popup_opened'}`}
-           onClick={handlePopupClose}
-      >
+           onClick={handlePopupClose}>
         <form className={`popup-form popup-form_type_${props.name}`} name={props.name} onSubmit={props.onSubmit}>
           <h2 className="popup-form__title">{props.title}</h2>
           {props.children}

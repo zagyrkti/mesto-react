@@ -76,17 +76,37 @@ function App() {
     setSelectedCard(cardData)
   }
 
+  /*подумывал сделать через хaндлеры но не хотелось лишнего городить
+    но если поприкидывать действительно самый адекватный вариант*/
+  const handleEditProfileClose = () => {
+    setIsEditProfilePopupOpen(false)
+  }
+
+  const handleEditAvatarClose = () => {
+    setIsEditAvatarPopupOpen(false)
+  }
+
+  const handleAddPlaceClose = () => {
+    setIsAddPlacePopupOpen(false)
+  }
+
+  const handleImagePopupClose = () => {
+    setSelectedCard({})
+  }
+
+  /*спасибо по catch finally спустя столько ревью выплыло ))*/
+  /*закрытие и ресет внутри then и правда поюзерфрендли будет*/
   const handleUpdateUser = (name, about, processing) => {
     processing(true);
     api.setUser(name, about)
         .then((userData) => {
           setCurrentUser(userData)
-        })
-        .finally(() => {
-          processing(false);
           setIsEditProfilePopupOpen(false)
         })
         .catch(console.log)
+        .finally(() => {
+          processing(false);
+        })
   }
   /*https://i.ibb.co/XVHWHmy/ava.jpg*/
   const handleUpdateAvatar = (link, processing, reset) => {
@@ -94,13 +114,13 @@ function App() {
     api.setUserAvatar(link)
         .then((userData) => {
           setCurrentUser(userData)
-        })
-        .finally(() => {
-          processing(false);
           setIsEditAvatarPopupOpen(false)
           reset()
         })
         .catch(console.log)
+        .finally(() => {
+          processing(false);
+        })
   }
 
   const handleAddPlaceSubmit = (name, link, processing, reset) => {
@@ -108,17 +128,17 @@ function App() {
     api.addCard(name, link)
         .then((cardData) => {
           setCardsData([cardData, ...cardsData]);
-        })
-        .finally(() => {
-          processing(false);
           setIsAddPlacePopupOpen(false)
           reset()
         })
         .catch(console.log)
+        .finally(() => {
+          processing(false);
+        })
   }
 
   /*Вызывать все сеттеры чтобы закрыть один конкретный попап это какое-то дно
-    сделал через передачу сеттера, ничего лучше не придумалось, если есть вариант получше буду благодарен*/
+    изначально сделал через передачу сеттера, после ревью переделал на хандлеры*/
   /*  const closeAllPopups = () => {
       setIsEditAvatarPopupOpen(false)
       setIsEditProfilePopupOpen(false)
@@ -135,15 +155,14 @@ function App() {
                 cardsData={cardsData} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
           <Footer/>
         </div>
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={setIsEditProfilePopupOpen}
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={handleEditProfileClose}
                           onUpdateUser={handleUpdateUser}/>
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={setIsEditAvatarPopupOpen}
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={handleEditAvatarClose}
                          onUpdateAvatar={handleUpdateAvatar}/>
-        <AddPlacePopup isOpen={isAddPlacePopupOpen}
-                       onClose={setIsAddPlacePopupOpen}
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={handleAddPlaceClose}
                        onAddPlace={handleAddPlaceSubmit}/>
         <PopupWithForm title='Вы уверены?' name='confirmation' submitText='Да'/>
-        <ImagePopup card={selectedCard} onClose={setSelectedCard}/>
+        <ImagePopup card={selectedCard} onClose={handleImagePopupClose}/>
       </CurrentUserContext.Provider>
   );
 }

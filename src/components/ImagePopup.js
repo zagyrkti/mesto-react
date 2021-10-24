@@ -5,7 +5,7 @@ function ImagePopup(props) {
   const handlePopupClose = useCallback((evt) => {
     if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close") || (evt.key === "Escape")) {
       if (onClose) {
-        onClose({}) /*object | empty object:close*/
+        onClose()
       }
     }
   }, [onClose])
@@ -18,7 +18,7 @@ function ImagePopup(props) {
         document.removeEventListener("keydown", handlePopupClose);
       }
     }
-  },[props.card.link, handlePopupClose])
+  }, [props.card.link, handlePopupClose])
 
   return (
       <div className={`popup_type_figure popup ${props.card.link && 'popup_opened'}`}
